@@ -24,6 +24,9 @@ export async function POST(req: Request) {
 
     if (!file) return NextResponse.json({ message: "Image is required" });
 
+    let tags = JSON.parse(formData.get("tags") as string)
+    let agenda = JSON.parse(formData.get("agenda") as string)
+
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
@@ -42,7 +45,7 @@ export async function POST(req: Request) {
 
     event.image = (uploadResult as { secure_url: string }).secure_url;
 
-    const createdEvent = await Event.create(event);
+    const createdEvent = await Event.create({...event, agenda: agenda, tags: tags});
 
     return NextResponse.json(
       { message: "Event created successfully", event: createdEvent },
