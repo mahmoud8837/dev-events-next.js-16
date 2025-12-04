@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { IEvent } from "@/database/event.model";
+import { Suspense } from "react";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
@@ -96,13 +97,15 @@ export default async function EventsPage() {
                   <div className="flex flex-col gap-1 text-sm text-color-light-200">
                     <div className="flex items-center gap-2">
                       <span>📅</span>
-                      <span>
-                        {new Date(event.date).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "short",
-                          day: "numeric",
-                        })}
-                      </span>
+                      <Suspense fallback={<span>Loading date...</span>}>
+                        <span>
+                          {new Date(event.date).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          })}
+                        </span>
+                      </Suspense>
                     </div>
                     <div className="flex items-center gap-2">
                       <span>🕐</span>
