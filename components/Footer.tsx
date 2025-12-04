@@ -141,7 +141,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="flex flex-col mb-4 sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
           <p className="text-color-light-200 text-sm">
-            © {new Date().getFullYear()} DevEvent. All rights reserved.
+            © 2025 DevEvent. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-color-light-200">
             <Link href="#" className="hover:text-color-blue transition-colors">
