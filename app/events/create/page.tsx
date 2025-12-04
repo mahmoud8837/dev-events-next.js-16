@@ -39,7 +39,7 @@ export default function CreateEventPage() {
   }
 
   return (
-    <main className="min-h-screen p-12">
+    <div className="min-h-screen">
       <div className="max-w-4xl mx-auto site-background p-8 rounded-xl">
         <h1 className="text-3xl font-bold mb-2">Create New Event</h1>
         <p className="text-light-100 mb-6">
@@ -227,6 +227,6 @@ export default function CreateEventPage() {
           </div>
         </div>
       )}
-    </main>
+    </div>
   );
 }

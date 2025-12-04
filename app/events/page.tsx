@@ -26,7 +26,7 @@ export default async function EventsPage() {
   const events = await getEvents();
 
   return (
-    <main id="events-page" className="min-h-screen">
+    <div id="events-page" className="min-h-screen">
       {/* Header Section */}
       <div className="mb-12">
         <h1 className="text-6xl font-bold max-sm:text-4xl mb-3">Events</h1>
@@ -45,7 +45,7 @@ export default async function EventsPage() {
 
       {/* Events Grid */}
       {events.length > 0 ? (
-        <div className="events grid md:grid-cols-3 gap-6 sm:grid-cols-2 grid-cols-1">
+        <div className="events grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:grid-cols-1 grid-cols-1">
           {events.map((event) => (
             <Link
               key={event._id?.toString()}
@@ -145,6 +145,6 @@ export default async function EventsPage() {
           </p>
         </div>
       )}
-    </main>
+    </div>
   );
 }

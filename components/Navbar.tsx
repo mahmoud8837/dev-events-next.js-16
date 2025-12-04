@@ -28,7 +28,7 @@ const Navbar = () => {
                 href={link.href}
                 className={`
                 ${pathname === link.href ? "bg-primary/90 font-semibold" : "text-color-light-100"}
-                  hover:bg-primary/70 transition-colors px-3 py-2 rounded-md`}
+                  hover:bg-primary/70 transition-colors px-3 py-2 rounded-md text-nowrap`}
               >
                 {link.name}
               </Link>
