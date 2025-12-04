@@ -9,12 +9,17 @@ import Link from "next/link";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-const Page = async () => {
-  "use cache";
-  cacheLife("seconds");
+const getEvents = async (): Promise<IEvent[]> => {
+  const response = await fetch(`${BASE_URL}/api/events`, {
+    next: { revalidate: 60 },
+  });
+  const data = await response.json();
+  return data.events || [];
+};
 
-  const response = await fetch(`${BASE_URL}/api/events`);
-  const { events } = await response.json();
+const Page = async () => {
+
+  const events = await getEvents();
 
   return (
     <>

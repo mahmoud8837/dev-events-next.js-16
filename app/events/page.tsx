@@ -6,7 +6,6 @@ import { Suspense } from "react";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
 async function getEvents(): Promise<IEvent[]> {
-  try {
     const response = await fetch(`${BASE_URL}/api/events`, {
       method: "GET",
       headers: {
@@ -21,10 +20,6 @@ async function getEvents(): Promise<IEvent[]> {
 
     const data = await response.json();
     return data.events || [];
-  } catch (error) {
-    console.error("Error fetching events:", error);
-    return [];
-  }
 }
 
 export default async function EventsPage() {

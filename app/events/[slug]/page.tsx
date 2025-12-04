@@ -50,7 +50,7 @@ const EventDetailsPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = await params;
 
   let event;
-  try {
+  
     const request = await fetch(`${BASE_URL}/api/events/${slug}`, {
       next: { revalidate: 60 },
     });
@@ -68,10 +68,6 @@ const EventDetailsPage = async ({ params }: { params: { slug: string } }) => {
     if (!event) {
       return notFound();
     }
-  } catch (error) {
-    console.error("Error fetching event:", error);
-    return notFound();
-  }
 
   const {
     description,
