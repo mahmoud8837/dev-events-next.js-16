@@ -1,8 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { usePathname } from "next/navigation";
+
+const links = [
+  { name: "Home", href: "/" },
+  { name: "Events", href: "/events" },
+  { name: "Create Event", href: "/events/create" },
+]
 
 const Navbar = () => {
+  
+  const pathname = usePathname();
+
   return (
     <header>
       <nav>
@@ -11,9 +22,18 @@ const Navbar = () => {
           <p>DevEvent</p>
         </Link>
         <ul>
-          <Link href={"/"}>Home</Link>
-          <Link href={"/"}>Events</Link>
-          <Link href={"/"}>Create Event</Link>
+          {links.map(link => (
+            <li key={link.name}>
+              <Link
+                href={link.href}
+                className={`
+                ${pathname === link.href ? "bg-primary/90 font-semibold" : "text-color-light-100"}
+                  hover:bg-primary/70 transition-colors px-3 py-2 rounded-md`}
+              >
+                {link.name}
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
     </header>
