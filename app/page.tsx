@@ -4,8 +4,8 @@ import LightRays from "@/components/LightRays";
 import Showcase from "@/components/Showcase";
 import { IEvent } from "@/database";
 import { ArrowRight } from "lucide-react";
-import { cacheLife } from "next/cache";
 import Link from "next/link";
+import { Suspense } from "react";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -18,6 +18,7 @@ const getEvents = async (): Promise<IEvent[]> => {
 };
 
 const Page = async () => {
+
 
   const events = await getEvents();
 
@@ -48,15 +49,17 @@ const Page = async () => {
         </div>
         <div id="events" className="space-y-7">
           <h3>Featured Events</h3>
-          <ul className="events">
-            {events &&
-              events.length > 0 &&
-              events.slice(0, 6).map((event: IEvent) => (
-                <li key={event.title}>
-                  <EventCard {...event} />
-                </li>
-              ))}
-          </ul>
+          <Suspense fallback={<p>Loading events...</p>}>
+            <ul className="events">
+              {events &&
+                events.length > 0 &&
+                events.slice(0, 6).map((event: IEvent) => (
+                  <li key={event.title}>
+                    <EventCard {...event} />
+                  </li>
+                ))}
+            </ul>
+          </Suspense>
           <Link href="/events" className="flex items-center justify-center gap-2 font-semibold text-lg  mx-auto bg-linear-to-br from-primary via-secondary-foreground to-primary hover:from-gray-600 hover:to-gray-600 text-white duration-300 cursor-pointer px-4 py-2 rounded-lg w-fit">All Events <ArrowRight /></Link>
         </div>{" "}
       </section>
